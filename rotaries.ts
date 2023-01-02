@@ -1,7 +1,7 @@
 import { Rotary } from "./rotary";
 
 export class Rotaries {
-    rotarymap = new Map<number, Rotary>();
+    private rotarymap = new Map<number, Rotary>();
     constructor(idlist: number[]) {
         idlist.forEach(element=> {
           //creats the map with rotary-objects and setting the default-name property

@@ -3,7 +3,7 @@ import { LEDColor } from "./arturia_constants";
 
 var keyboard = new ArturiaMinilab();
 //change name by Address
-keyboard.leds.LED(1).Name = "ABC"
+keyboard.leds.LED(1).name = "ABC"
 //change name by old Name
 keyboard.rotaries.rotary("RotaryMidiNr16").name = "TEST";
 //configure colors of the LED

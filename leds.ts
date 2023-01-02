@@ -17,7 +17,7 @@ export class LEDs {
 
     private getLEDByName(name: string): LED {
         for (var elem of this.ledmap.entries()) {
-          if (elem[1].Name == name)
+          if (elem[1].name == name)
             return elem[1];
         }
         throw new Error('Wrong Rotary-Name:' + name)

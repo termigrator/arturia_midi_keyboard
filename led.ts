@@ -2,19 +2,19 @@ import { LEDColor } from "./arturia_constants";
 
 export class LED {
 
-    ID: number; 
-    Name: string; 
-    Status: number; 
-    private ColorOn: LEDColor; 
-    private ColorOff: LEDColor; 
-    OnValueChanged: Function;
+    midiID: number; 
+    name: string; 
+    status: number; 
+    private colorOn: LEDColor; 
+    private colorOff: LEDColor; 
+    onValueChanged: Function;
 
     constructor(id: number, color: LEDColor, onvaluechanged: Function) {
-        this.ID = id;
-        this.Status = 0;
-        this.ColorOn = color;
-        this.ColorOff = LEDColor.black;  //switching off is realized by setting color to black
-        this.OnValueChanged = onvaluechanged; //This callback points to an function on the midi-Board, which will send the new color-code the board
+        this.midiID = id;
+        this.status = 0;
+        this.colorOn = color;
+        this.colorOff = LEDColor.black;  //switching off is realized by setting color to black
+        this.onValueChanged = onvaluechanged; //This callback points to an function on the midi-Board, which will send the new color-code the board
     }
 
 
@@ -23,10 +23,10 @@ export class LED {
      * to the defined "on-color" on the Midi-Board is called
      */
     on() {
-        if (this.Status == 0) {
+        if (this.status == 0) {
             //console.log(`new LED status 1 for LED ${this.ID}, color will be set to ${this.ColorOn}`)
-            this.Status = 1;
-            this.OnValueChanged(this.ID, this.ColorOn);
+            this.status = 1;
+            this.onValueChanged(this.midiID, this.colorOn);
         }
 
     }
@@ -36,15 +36,15 @@ export class LED {
      * to the defined "off-color", wich standard is mostly black,  on the Midi-Board is called
      */
     off() {
-        if (this.Status == 1) {
-            this.Status = 0
+        if (this.status == 1) {
+            this.status = 0
             //console.log(`new LED status 0 for LED ${this.ID}, color will be set to ${this.ColorOff}`)
-            this.OnValueChanged(this.ID, this.ColorOff);
+            this.onValueChanged(this.midiID, this.colorOff);
         }
     }
 
     set color(color: LEDColor) {
-        this.ColorOn = color;
+        this.colorOn = color;
     }
 
     get color() {
