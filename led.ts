@@ -2,12 +2,18 @@ import { LEDColor } from "./arturia_constants";
 
 export class LED {
 
-    ID: number; Name: string; Status: number; ColorOn: LEDColor; ColorOff: LEDColor; OnValueChanged: Function;
+    ID: number; 
+    Name: string; 
+    Status: number; 
+    private ColorOn: LEDColor; 
+    private ColorOff: LEDColor; 
+    OnValueChanged: Function;
+
     constructor(id: number, color: LEDColor, onvaluechanged: Function) {
         this.ID = id;
         this.Status = 0;
         this.ColorOn = color;
-        this.ColorOff = LEDColor.black;
+        this.ColorOff = LEDColor.black;  //switching off is realized by setting color to black
         this.OnValueChanged = onvaluechanged; //This callback points to an function on the midi-Board, which will send the new color-code the board
     }
 

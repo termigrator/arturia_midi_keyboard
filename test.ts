@@ -7,8 +7,8 @@ keyboard.leds.LED(1).Name = "ABC"
 //change name by old Name
 keyboard.rotaries.rotary("RotaryMidiNr16").name = "TEST";
 //configure colors of the LED
-keyboard.leds.LED(2).ColorOn = LEDColor.cyan;
-keyboard.leds.LED(1).ColorOn = LEDColor.green;
+keyboard.leds.LED(2).color = LEDColor.cyan;
+keyboard.leds.LED(1).color = LEDColor.green;
 //switch two LEDs on, one by new name, one by address
 keyboard.leds.LED("ABC").on();
 keyboard.leds.LED(2).on();

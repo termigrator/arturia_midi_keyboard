@@ -4,8 +4,8 @@ import { LED } from "./led";
 export class LEDs {
     ledmap = new Map<number, LED>();
     constructor(idlist: number[], OnChange:Function) {
-        idlist.forEach(element=> {
-            this.ledmap.set(element, new LED(element, LEDColor.green, OnChange))
+        idlist.forEach(id=> {
+            this.ledmap.set(id, new LED(id, LEDColor.green, OnChange))
         });
     }
     LED(searchterm:number|string):LED{
