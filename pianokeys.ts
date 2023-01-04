@@ -5,7 +5,7 @@ export class Pianokeys {
     pianokeymap = new Map<number, Pianokey>();
     constructor(idlist: number[]) {
         idlist.forEach(element => {
-            this.pianokeymap.set(element, new Pianokey(element, "Key" + element))
+            this.pianokeymap.set(element, new Pianokey(element))
         });
     }
     /**
@@ -17,17 +17,17 @@ export class Pianokeys {
         if (typeof searchterm == 'number')  //search by address
             return <Pianokey>this.pianokeymap.get(searchterm);
         else //search by name
-            return this.getPianokeyByName(searchterm);
+            return this.getPianokeyByBinding(searchterm);
     }
     /**
      * Searches for a pianokey by its name.
      * @param {String} searchterm Name of the searched Pianokey
      * @returns {Pianokey} Pianokey
      */
-    private getPianokeyByName(name: string): Pianokey {
+    private getPianokeyByBinding(name: string): Pianokey {
         //recurse komplete Dictionary to find searched Name
         for (var elem of this.pianokeymap.entries()) {
-            if (elem[1].name == name)
+            if (elem[1].binding == name)
                 return elem[1];
         }
         throw new Error('Wrong Pianokey-Name:' + name)

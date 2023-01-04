@@ -5,7 +5,7 @@ export class Rotaries {
     constructor(idlist: number[]) {
         idlist.forEach(element=> {
           //creats the map with rotary-objects and setting the default-name property
-            this.rotarymap.set(element, new Rotary(element, "Rotary" + element))
+            this.rotarymap.set(element, new Rotary(element))
         });
     }
     
@@ -15,12 +15,12 @@ export class Rotaries {
         if (typeof searchterm == 'number')
         return <Rotary>this.rotarymap.get(searchterm);
       else
-        return this.getRotaryByName(searchterm);
+        return this.getRotaryByBinding(searchterm);
     }
 
-    private getRotaryByName(name: string): Rotary {
+    private getRotaryByBinding(name: string): Rotary {
         for (var elem of this.rotarymap.entries()) {
-          if (elem[1].name == name)
+          if (elem[1].binding == name)
             return elem[1];
         }
         throw new Error('Wrong Rotary-Name:' + name)

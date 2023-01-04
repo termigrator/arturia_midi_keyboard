@@ -12,12 +12,12 @@ export class LEDs {
         if (typeof searchterm == 'number')
         return <LED>this.ledmap.get(searchterm);
       else
-        return this.getLEDByName(searchterm);
+        return this.getLEDByBinding(searchterm);
     }
 
-    private getLEDByName(name: string): LED {
+    private getLEDByBinding(name: string): LED {
         for (var elem of this.ledmap.entries()) {
-          if (elem[1].name == name)
+          if (elem[1].binding == name)
             return elem[1];
         }
         throw new Error('Wrong Rotary-Name:' + name)

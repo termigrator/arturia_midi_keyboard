@@ -3,9 +3,9 @@ import { LEDColor } from "./arturia_constants";
 
 var keyboard = new ArturiaMinilab();
 //change name by Address
-keyboard.leds.LED(1).name = "ABC"
+keyboard.leds.LED(1).binding = "ABC"
 //change name by old Name
-keyboard.rotaries.rotary("RotaryMidiNr16").name = "TEST";
+keyboard.rotaries.rotary(16).binding = "TEST";
 //configure colors of the LED
 keyboard.leds.LED(2).color = LEDColor.cyan;
 keyboard.leds.LED(1).color = LEDColor.green;
@@ -15,9 +15,9 @@ keyboard.leds.LED(2).on();
 
 //wait for events
 keyboard.events.on("rotary", msg => {
-    console.log(msg.name, msg.direction);
+    console.log(msg.binding, msg.direction);
 })
 keyboard.events.on("pianokeypress", msg => {
-    console.log(msg.name, msg.velocity);
+    console.log(msg.binding, msg.velocity);
 });
 

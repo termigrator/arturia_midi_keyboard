@@ -3,7 +3,7 @@ import { LEDColor } from "./arturia_constants";
 export class LED {
 
     midiID: number; 
-    name: string; 
+    binding: string; 
     status: number; 
     private colorOn: LEDColor; 
     private colorOff: LEDColor; 
