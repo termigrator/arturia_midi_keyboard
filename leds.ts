@@ -15,11 +15,11 @@ export class LEDs {
         return this.getLEDByBinding(searchterm);
     }
 
-    private getLEDByBinding(name: string): LED {
+    private getLEDByBinding(binding: string): LED {
         for (var elem of this.ledmap.entries()) {
-          if (elem[1].binding == name)
+          if (elem[1].binding == binding)
             return elem[1];
         }
-        throw new Error('Wrong Rotary-Name:' + name)
+        throw new Error('Wrong LED-Binding:' + binding)
       }
 }
