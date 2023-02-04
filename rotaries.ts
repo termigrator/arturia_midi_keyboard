@@ -11,18 +11,15 @@ export class Rotaries {
     
         // Returns a Rotary object based on the search term.
     
-    rotary(searchterm:number|string):Rotary{
-        if (typeof searchterm == 'number')
-        return <Rotary>this.rotarymap.get(searchterm);
-      else
-        return this.getRotaryByBinding(searchterm);
+    rotary(midiID:number):Rotary{
+        return this.rotarymap.get(midiID);
     }
 
-    private getRotaryByBinding(name: string): Rotary {
+    getByBinding(searchedBinding: number|string|Function): Rotary {
         for (var elem of this.rotarymap.entries()) {
-          if (elem[1].binding == name)
+          if ((elem[1].binding_inc == searchedBinding)||(elem[1].binding_dec == searchedBinding))
             return elem[1];
         }
-        throw new Error('Wrong Rotary-Name:' + name)
+        throw new Error('no Rotary with binding:' + searchedBinding)
       }
 }

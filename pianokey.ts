@@ -1,10 +1,9 @@
 export class Pianokey {
     
     midiID: number = 0;
-    binding: string = "";
+    binding: string |number|Function;;
 
-    constructor(adress: number, binding: string = "") {
-      this.midiID = adress;
-      this.binding = binding;
+    constructor(midi_id: number) {
+      this.midiID = midi_id;
     }
   }

@@ -37,21 +37,20 @@ export class ArturiaMinilab {
     //* Handle Rotary-Action
     this.input.on("cc", function (msg) {
       var rot = my.rotaries.rotary(msg.controller);
+
       if (!rot) {
+        //Midi-code not in collection
         console.log(`undefined Rotary sends on [${[msg.channel, msg.controller, msg.value].toString()}]`);
-        return;
-      }
-      if (!rot.binding) {
+      } else if (!rot.binding_inc &&  !rot.binding_dec) {
+        //none of the bindings is set
         console.log(`unbound Rotary ${msg.controller} sends value ${msg.value}`);
-        return;
       }
       //continue, we have a bound rotary
-      if (msg.value == 65) {
-        my.events.emit("rotary", { id: rot.midiID, binding: rot.binding, direction: 1 }); //Dont use "this.", use "my instead"
+      else if (msg.value == 65) {
+        my.events.emit("rotary", { id: rot.midiID, binding: rot.binding_inc, direction: 1 }); //Dont use "this.", use "my instead"
         //console.log("Emit:", rot.name,1);
-      }
-      if (msg.value == 63) {
-        my.events.emit("rotary", { id: rot.midiID, binding: rot.binding, direction: -1 }); //Dont use "this.", use "my instead"
+      } else if (msg.value == 63) {
+        my.events.emit("rotary", { id: rot.midiID, binding: rot.binding_dec, direction: -1 }); //Dont use "this.", use "my instead"
         //console.log("Emit:"+rot.name, -1);
       }
     });
@@ -59,18 +58,28 @@ export class ArturiaMinilab {
     //Keyboard-Actions
     this.input.on("noteon", function (msg) {
       var key = my.pianokeys.pianokey(msg.note);
-      if (key) {
-        my.events.emit("pianokeypress", { id: key.midiID, binding: key.binding, velocity: msg.velocity });
-        //console.log("Emit:", key.name);
-      } else console.log(`unregistered Pianokey sends on [${[msg.channel, msg.note].toString()}]`);
+      if (!key) {
+        //Midi-code not in collection
+        console.log(`undefined Keyboard-Key sends on [${[msg.channel, msg.note].toString()}]`);
+        return;
+      }
+      if (!key.binding) {
+        console.log(`unbound Keyboard-Key sends on [${[msg.channel, msg.note].toString()}]`);
+        return;
+      }
+      my.events.emit("pianokeypress", { id: key.midiID, binding: key.binding, velocity: msg.velocity });
     });
 
     this.input.on("noteoff", function (msg) {
       var key = my.pianokeys.pianokey(msg.note);
-      if (key) {
-        my.events.emit("pianokeyrelease", { id: key.midiID, binding: key.binding, velocity: msg.velocity });
-        //console.log("Emit:", key.name);
-      } else console.log(`unregistered Pianokey sends on [${[msg.channel, msg.note].toString()}]`);
+      if (!key) {
+        //Midi-code not in collection
+        console.log(`undefined Keyboard-Key sends on [${[msg.channel, msg.note].toString()}]`);
+      } else if (!key.binding) {
+        console.log(`unbound Keyboard-Key sends on [${[msg.channel, msg.note].toString()}]`);
+        return;
+      } else my.events.emit("pianokeyrelease", { id: key.midiID, binding: key.binding, velocity: msg.velocity });
+      //console.log("Emit:", key.name);
     });
   }
 

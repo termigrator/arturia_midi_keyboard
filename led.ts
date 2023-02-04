@@ -17,6 +17,9 @@ export class LED {
         this.onValueChanged = onvaluechanged; //This callback points to an function on the midi-Board, which will send the new color-code the board
     }
 
+    switch(toState: number) {
+        toState ==1 ? this.on() :this.off();
+    }
 
     /**
      * If nessecary, a new status is generated and the callback to change the color

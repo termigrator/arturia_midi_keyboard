@@ -1,11 +1,11 @@
 export class Rotary {
   midiID: number = 0;
-  binding: string = "";
+  binding_inc: string |number|Function;
+  binding_dec: string |number|Function;;
   Value: number = 0;
 
-  constructor(adress: number, binding: string = "") {
-    this.midiID = adress;
-    this.binding = binding;
+  constructor(midiid: number) {
+    this.midiID = midiid;
   }
 
 }

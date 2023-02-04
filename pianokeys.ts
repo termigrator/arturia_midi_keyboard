@@ -13,18 +13,15 @@ export class Pianokeys {
      * @param searchterm Name or Address of the searched Pianokey
      * @returns Pianokey
      */
-    pianokey(searchterm: number | string): Pianokey {
-        if (typeof searchterm == 'number')  //search by address
+    pianokey(searchterm: number ): Pianokey {
             return <Pianokey>this.pianokeymap.get(searchterm);
-        else //search by name
-            return this.getPianokeyByBinding(searchterm);
     }
     /**
      * Searches for a pianokey by its name.
      * @param {String} searchterm Name of the searched Pianokey
      * @returns {Pianokey} Pianokey
      */
-    private getPianokeyByBinding(name: string): Pianokey {
+    getByBinding(name: string|number|Function): Pianokey {
         //recurse komplete Dictionary to find searched Name
         for (var elem of this.pianokeymap.entries()) {
             if (elem[1].binding == name)
